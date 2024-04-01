@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-rollouts-controller
+spec:
+  destination:
+    name: ''
+    namespace: argo-rollouts
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ./argo-rollouts-controller
+    repoURL: 'https://github.com/silvertagback/gitops-certification-examples.git'
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true

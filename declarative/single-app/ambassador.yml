@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ambassador
+spec:
+  destination:
+    name: ''
+    namespace: ambassador
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ./ambassador-chart
+    repoURL: 'https://github.com/silvertagback/gitops-certification-examples.git'
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
